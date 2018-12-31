@@ -134,21 +134,16 @@
                 {{ theme.links_title }}
               </div>
               <ul class="links-of-blogroll-list">
-                {% for blogrollText, blogrollURL in theme.links %}
+                {% for name, link in theme.links %}
                   <li class="links-of-blogroll-item">
-                    {{ next_url(blogrollURL, blogrollText, {title: blogrollURL}) }}
+                    <a href="{{ link }}" title="{{ name }}" target="_blank">{{ name }}</a>
                   </li>
                 {% endfor %}
               </ul>
+              {% include '../_custom/sidebar.swig' %}
             </div>
           {% endif %}
 
-          {% if theme.custom_file_path.sidebar %}
-            {% set custom_sidebar = '../../../../' + theme.custom_file_path.sidebar %}
-          {% else %}
-            {% set custom_sidebar = '../_custom/sidebar.swig' %}
-          {% endif %}
-          {% include custom_sidebar %}
         </div>
       </div>
 
