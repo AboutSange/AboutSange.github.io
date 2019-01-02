@@ -5,16 +5,16 @@
 # Site
 title: AboutSange
 subtitle: 输入就要有输出
-description: Python, Learner
-keywords: hexo, 博客, 生活, 技术, 代码
+description: 好奇心, 想象力
+keywords: 好奇心, 想象力, hexo, 博客, 生活, 技术, 代码
 author: AboutSange
-avatar: https://avatars2.githubusercontent.com/u/27603447?s=460&v=4
+avatar: https://raw.githubusercontent.com/AboutSange/img/master/AboutSange.jpg
 language: zh-CN
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://aboutsange.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
