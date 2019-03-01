@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python知识点之内存泄露]]></title>
+    <url>%2F2019%2F03%2F01%2FPython%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%2F</url>
+    <content type="text"><![CDATA[目录1. 内存泄漏是什么？2. 内存泄露的原因3. 内存泄露的诊断思路4. 内存泄露的解决方法 正文内存泄漏是什么？内存泄露是指由于疏忽或错误造成程序未能释放已经不再使用的内存。表现形式为内存持续增长。 内存泄露的原因python使用垃圾自动回收机制（引用计数、标记-清除算法、分代算法）来管理内存；那什么情况下还会产生内存泄露呢？1.对象被另一个生命周期特别长的对象所引用；2.循环引用中的对象定义了__del__函数；3.第三方C模块不严谨，有内存泄露 内存泄露的诊断思路1.火焰图（展示函数的执行时间）2.memory_profiler（用来分析每行代码的内存使用情况）3.gc（可以主动回收内存）, objgraph（可以打印对象的信息及引用，还可以打印出函数调用关系）4.sys.getrefcount(obj) 获取对象的引用计数 内存泄露的解决方法1.弱引用（weakref）2.如果是Django发现有内存泄露的迹象，确认Debug=False即可（如为True则会保存SQL备份） 参考文章 Python内存泄露调试指导思想 - JackyWu’s Blog 使用gc、objgraph干掉python内存泄露与循环引用！ - xybaby - 博客园]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Python知识点</tag>
+        <tag>内存</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python知识点之闭包]]></title>
     <url>%2F2019%2F02%2F27%2FPython%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E9%97%AD%E5%8C%85%2F</url>
     <content type="text"><![CDATA[目录1. 作用域（LEGB）2. 闭包是什么？3. 为什么要用闭包？4. 为什么通过闭包能实现在函数之外访问函数的局部变量？ 正文作用域（LEGB）LEGB 代表名字查找顺序: locals -&gt; enclosing function -&gt; globals -&gt; __builtins__ locals 是函数内的名字空间，包括局部变量和形参 enclosing 外部嵌套函数的名字空间（闭包中常见） globals 全局变量，函数定义所在模块的名字空间 builtins 内置模块的名字空间 闭包是什么？闭包（Closure），又称函数闭包，是引用了自由变量的函数。这个被引用的自由变量将和这个函数一同存在，即使已经离开了创造它的环境也不例外。所以，有另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。 为什么要用闭包？（1）闭包避免使用全局变量（2）闭包允许将函数与其所操作的某些数据（环境）关联起来（3）装饰器场景 为什么通过闭包能实现在函数之外访问函数的局部变量？def adder(x): def wrapper(y): return x + y return wrapperadder5 = adder(5)adder5(10) # 输出 15adder5(6) # 输出 11 所有函数都有一个 closure属性，如果这个函数是一个闭包的话，那么它返回的是一个由 cell 对象 组成的元组对象。cell 对象的cell_contents 属性就是闭包中的自由变量。 &gt;&gt;&gt; adder.__closure__&gt;&gt;&gt; adder5.__closure__(&lt;cell at 0x103075910: int object at 0x7fd251604518&gt;,)&gt;&gt;&gt; adder5.__closure__[0].cell_contents5 这解释了为什么局部变量脱离函数之后，还可以在函数之外被访问的原因的，因为它存储在了闭包的 cell_contents中了。 参考文章 一步一步教你认识Python闭包 - FooFish-Python之禅]]></content>
